@@ -84,16 +84,20 @@ class _AnswerSegmentState extends State<AnswerSegment>
                 _controller.repeat(reverse: true);
               }
             });
-            await Future.delayed(Duration(seconds: 1));
+            await Future.delayed(Duration(seconds: 2));
             setState(() {
               _isCorrect! ? widget.nextQuestion() : widget.shuffleList();
               _controller.reset();
             });
             widget.unBlockTapping();
+            if (_isCorrect!) {
+              widget.animationFadeInStart();
+            }
             setState(() {
               _isCorrect = null;
             });
-            _isCorrect! ? widget.animationFadeInStart() : null;
+
+            // _isCorrect! ? widget.animationFadeInStart() : null;
           },
           child: Text(
             widget.answer,

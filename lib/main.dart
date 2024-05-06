@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:suaalo_diini/provider/quizModel.dart';
 
 import 'screens/homeScreen.dart';
+import 'screens/quizesHome.dart';
+
+// void main() {
+//   runApp(const MyApp());
+// }
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => QuizMOdel())],
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +31,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       darkTheme: ThemeData(scaffoldBackgroundColor: Colors.black45),
-      home: const HomePage(),
+      routes: {
+        'home': (context) => HomePage(),
+        'quizesHome': (context) => QuizesHome()
+      },
+      initialRoute: 'quizesHome',
     );
   }
 }
@@ -43,7 +56,7 @@ class HomePage extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.more_vert,
                   color: Colors.white,
                 ))

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 import 'package:suaalo_diini/constants.dart';
+import 'package:suaalo_diini/provider/quizModel.dart';
 
 class QuestionSection extends StatelessWidget {
-  final String quetion;
-  final int currentQuestionNumber;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -30,7 +30,10 @@ class QuestionSection extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Center(
-              child: Text('${currentQuestionNumber.toString()} / 300'),
+              child: Text(
+                '${context.watch<QuizMOdel>().currentQuestion.toString()} / 300',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             Expanded(
               // child: Lottie.asset(
@@ -39,7 +42,7 @@ class QuestionSection extends StatelessWidget {
               // ),
               child: Center(
                   child: Text(
-                quetion,
+                context.watch<QuizMOdel>().question,
                 style: kQuestionTextStyle,
                 textAlign: TextAlign.center,
               )).animate().fadeIn(duration: const Duration(seconds: 3)),
@@ -50,6 +53,5 @@ class QuestionSection extends StatelessWidget {
     );
   }
 
-  const QuestionSection(
-      {super.key, required this.quetion, required this.currentQuestionNumber});
+  const QuestionSection({super.key});
 }
